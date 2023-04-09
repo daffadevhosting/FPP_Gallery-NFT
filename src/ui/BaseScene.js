@@ -19,7 +19,10 @@ const BasicScene = ({ children }) => {
 
         <PointerLockControls />
       </Canvas>
-      <Loader/>
+      <Loader
+        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
+        initialState={(active) => active}
+        />
     </div>
   );
 };

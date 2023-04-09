@@ -9,7 +9,7 @@ function App() {
   const texts = [
     { position: [-10, 6, -19.9], text: 'Lorem ipsum kolor si mamen', size: 1, color: 'red' },
     { position: [-19.9, 6, 14], rotation: [0, 45.55, 0], text: 'color sit amet cotor', size: 1.5, color: 'black' },
-    { position: [-10, 2, 0], text: 'condecttur adi pising di calana', size: 3 },
+    { position: [12, 2, 20], rotation: [0, 91.10, 0], text: 'condecttur adi pising di calana', size: 1 },
     { position: [19, 26, -5], rotation: [0, 91.10, 0], text: 'NFT Gallery', size: 5, height: 2 },
   ]
 
@@ -29,6 +29,7 @@ function App() {
       <BasePlane text={false} width={5} height={5} position={[-19.9, 3, 10]} rotation={[0, 45.55, 0]} textureUrl="/assets/frame/112so.png" />
       <BasePlane text={false}  width={10} height={5} position={[0, 3, -19.9]} textureUrl="/assets/frame/112so.png" />
       <BasePlane text={false} width={5} height={5} position={[10, 3, -19.9]} textureUrl="/assets/frame/112so.png" />
+      <BasePlane text={false} width={5} height={5} position={[-10, 3, -19.9]} textureUrl="/assets/frame/112so.png" />
 
       
       {texts.map((textProps, index) => <Text key={index} {...textProps} />)}
