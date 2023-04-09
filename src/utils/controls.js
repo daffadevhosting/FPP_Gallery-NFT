@@ -1,9 +1,56 @@
-import { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { Joystick } from 'react-joystick-component';
+// eslint-disable-next-line
+const JoystickControls = () => {
+  const cameraRef = useRef()
+  const controlsRef = useRef()
+  const [isMobile, setIsMobile] = useState(false)
+  const [joystickX, setJoystickX] = useState(0)
+  const [joystickZ, setJoystickZ] = useState(0)
 
-/*****************
- * Player Controls
- ****************/
-export const usePlayerControls = (isTouchDevice) => {
+  useEffect(() => {
+    // Check if the user is on a mobile device
+    const userAgent = window.navigator.userAgent.toLowerCase()
+    setIsMobile(userAgent.includes('android') || userAgent.includes('iphone'))
+  }, [])
+
+  // Setup DeviceOrientationControls
+  useFrame(() => {
+    if (controlsRef.current) {
+      // Move the camera based on joystick values
+      cameraRef.current.position.x += joystickX * 0.05
+      cameraRef.current.position.z += joystickZ * 0.05
+
+      // Update DeviceOrientationControls
+      controlsRef.current.update()
+    }
+  })
+
+  // Handle joystick movement
+  const handleJoystickMove = (e) => {
+    setJoystickX(e.x)
+    setJoystickZ(e.y)
+  }
+
+  if (!isMobile) {
+    return <perspectiveCamera ref={cameraRef} position={[0, 0, 5]} />
+  }
+
+  return (
+    <>
+      <perspectiveCamera ref={cameraRef} position={[0, 0, 5]} />
+      <Joystick
+        size={100}
+        baseColor="#f5f5f5"
+        stickColor="#6f6f6f"
+        move={(e) => handleJoystickMove(e)}
+      />
+    </>
+  )
+}
+
+export const usePlayerControls = () => {
   const keys = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right', Space: 'jump' };
   // eslint-disable-next-line
   const moveFieldByKey = (key) => keys[key];
@@ -22,54 +69,5 @@ export const usePlayerControls = (isTouchDevice) => {
       document.removeEventListener('keyup', handleKeyUp);
     };
   }, [moveFieldByKey]);
-
-  useEffect(() => {
-    if (!isTouchDevice) return;
-    
-    const handleTouchStart = (e) => {
-      e.preventDefault();
-
-      const touch = e.touches[0];
-      const x = touch.clientX;
-      const y = touch.clientY;
-
-      // Check if the touch is in the top or bottom half of the screen
-      const { innerHeight } = window;
-      const halfHeight = innerHeight / 2;
-
-      if (y < halfHeight) {
-        setMovement((m) => ({ ...m, forward: true }));
-      } else if (y > halfHeight) {
-        setMovement((m) => ({ ...m, backward: true }));
-      }
-
-      // Check if the touch is in the left or right half of the screen
-      const { innerWidth } = window;
-      const halfWidth = innerWidth / 2;
-
-      if (x < halfWidth) {
-        setMovement((m) => ({ ...m, left: true }));
-      } else if (x > halfWidth) {
-        setMovement((m) => ({ ...m, right: true }));
-      }
-    };
-
-    const handleTouchEnd = (e) => {
-      e.preventDefault();
-
-      setMovement({ forward: false, backward: false, left: false, right: false });
-    };
-
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchmove', handleTouchStart);
-    document.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [isTouchDevice]);
-
   return movement;
 };
