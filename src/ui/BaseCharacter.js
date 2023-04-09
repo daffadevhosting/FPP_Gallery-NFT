@@ -1,7 +1,7 @@
 import { useSphere } from '@react-three/cannon';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import { usePlayerControls } from '../utils/helpers.js';
+import { usePlayerControls } from '../utils/controls.js';
 import * as THREE from 'three';
 
 const BaseCharacter = (props) => {

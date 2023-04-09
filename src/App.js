@@ -10,15 +10,17 @@ function App() {
     { position: [-10, 6, -19.9], text: 'Lorem ipsum kolor si mamen', size: 1, color: 'red' },
     { position: [-19.9, 6, 14], rotation: [0, 45.55, 0], text: 'color sit amet cotor', size: 1.5, color: 'black' },
     { position: [-10, 2, 0], text: 'condecttur adi pising di calana', size: 3 },
+    { position: [19, 26, -5], rotation: [0, 91.10, 0], text: 'NFT Gallery', size: 5, height: 2 },
   ]
 
   return (
     <BaseScene>
-      <BaseBox text={false} position={[-20, 0.5, 0]} args={[0.1, 15, 50]} color="gray" />
-      <BaseBox text={false} position={[20, 0.5, 0]} args={[0.1, 15, 50]} color="gray" />
-      <BaseBox text={false} position={[0, 0.5, -20]} args={[50, 15, 0.1]} color="dimgray" />
-      <BaseBox text={false} position={[0, 0.5, 20]} args={[50, 15, 0.1]} color="dimgray" />
-      <BaseBox text={false} position={[0, 0.5, 20]} args={[50, 15, 0.1]} color="dimgray" />
+      <BaseBox text={false} position={[-20, 0.5, 0]} args={[0.1, 30, 50]} color="gray" />
+      <BaseBox text={false} position={[20, 0.5, 0]} args={[0.1, 30, 50]} color="gray" />
+      <BaseBox text={false} position={[0, 0.5, -20]} args={[50, 30, 0.1]} color="dimgray" />
+      <BaseBox text={false} position={[0, 0.5, 20]} args={[50, 30, 0.1]} color="dimgray" />
+      <BaseBox text={false} position={[0, 0.5, 20]} args={[50, 30, 0.1]} color="dimgray" />
+      <BaseBox text={false} position={[0, 30, 20]} args={[50, 30, 50]} color="dimgray" />
 
       <BaseCharacter controls position={[0, 2, 0]} args={[0.5]} color="yellow" />
 
