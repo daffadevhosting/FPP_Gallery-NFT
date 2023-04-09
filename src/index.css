@@ -11,6 +11,8 @@ canvas {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #000;
+  color: #fff;
 }
 
 .dot {
@@ -23,3 +25,47 @@ canvas {
   transform: translate3d(-50%, -50%, 0);
   border: 2px solid white;
 }
+
+#mobileInterface {
+  display: none;
+  visibility: hidden;
+  }
+
+
+@media (max-width: 768px) {
+#mobileInterface {
+  display: block;
+  visibility: visible;
+  position: fixed;
+  width: calc(100% - 20px);
+  height: 50vh;
+  pointer-events: none;
+  z-index: 11;
+  bottom: 30px;
+  left: 30px;
+  touch-action: manipulation;
+}
+
+#joystickWrapper1 {
+  pointer-events: auto;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  width: 120px;
+  height: 120px;
+  z-index: 12;
+  touch-action: manipulation;
+  background-color: rgba(red, 0.2);
+}
+
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}}

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Canvas } from '@react-three/fiber';
 import { Loader, PointerLockControls } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
@@ -8,7 +9,12 @@ const BasicScene = ({ children }) => {
 
   return (
     <div style={{ height: '100vh' }}>
-      <Canvas shadows camera={{ fov: 50 }}>
+        <Suspense fallback={null}>
+      <Canvas dpr={[1, 2]} shadows
+             camera={{
+              makeDefault: true,
+              fov: 50
+            }}>
         <Lights />
 
         <Physics gravity={[0, -9.8, 0]}>
@@ -16,13 +22,10 @@ const BasicScene = ({ children }) => {
 
           <Floor rotation={[Math.PI / -2, 0, 0]} color="dimgray" />
         </Physics>
-
         <PointerLockControls />
       </Canvas>
-      <Loader
-        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
-        initialState={(active) => active}
-        />
+        </Suspense>
+      <Loader />
     </div>
   );
 };
