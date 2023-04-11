@@ -12,4 +12,3 @@ Control ( W S A D )
  - @react-three/cannon
  - THREE.js
 
-<img src="/screenshot.png" style="width: 100%;"/>
